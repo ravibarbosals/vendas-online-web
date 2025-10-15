@@ -2,13 +2,23 @@ import './main.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import { GlobalProvider } from './shared/hooks/useGlobalContext';
+import { createBrowserRouter, RouterProvider, type RouteObject } from 'react-router-dom';
+
+import { loginRoutes } from './modules/login/routes';
+
+
+const mainRoutes: RouteObject[]  = ([
+  {
+    path: '/',
+    element: <div>Tela Principal</div>, 
+    errorElement: <div>Página não encontrada</div>,
+  },
+]);
+
+const router = createBrowserRouter ([ ...mainRoutes, ...loginRoutes]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <GlobalProvider></GlobalProvider>
-     <App />
-    </GlobalProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );
