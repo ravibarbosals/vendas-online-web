@@ -12,6 +12,7 @@ import {
 } from "../styles/loginScreen.styles";
 import { userRequest } from '../../../shared/hooks/useRequest';
 import { useGlobalContext } from '../../../shared/hooks/useGlobalContext';
+import type { UserType } from '../types/UserType';
 
 
 const LoginScreen = () => {
@@ -29,11 +30,12 @@ const LoginScreen = () => {
     };
 
     const handleLogin = async () => {
-        setAccessToken('novo token');
-        postRequest("http://localhost:8080/auth" , {
+        const user = await postRequest<UserType>("http://localhost:8080/auth" , {
                 email: email,
                 password: password,
         });
+
+        setAccessToken(user?.accessToken || '');
     };
 
 
