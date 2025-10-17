@@ -1,6 +1,5 @@
-import axios from "axios";
 import { useState } from "react";
-import { connectionAPIPost } from "../functions/connection/connectionAPI";
+import ConnectionAPI, { connectionAPIPost, MethodType } from "../functions/connection/connectionAPI";
 import { useGlobalContext } from "./useGlobalContext";
 import { URL_AUTH } from "../constants/urls";
 import { ERROR_INVALID_PASSWORD } from "../constants/errorsStatus";
@@ -15,19 +14,29 @@ export const userRequest = () => {
     const { setNotification, setUser } = useGlobalContext();
 
 
-    const getRequest = async (url: string) => {
+    const request = async <T>(
+        url: string, 
+        methods: MethodType, 
+        saveGlobal?: (object: T) => void,
+        body?: unknown,
+    ): Promise<T | undefined> => {
         setLoading(true);
-        return await axios({
-            method: 'get',
-            url: url,
-            
-    })
-    .then((result) => {
-        return result.data;
-    })
-    .catch(() => {
-        alert('Erro');
-        });
+
+        const returnObject: T | undefined = await ConnectionAPI.connect<T>(url, methods, body)            
+            .then((result) => {
+                if(saveGlobal) {
+                saveGlobal(result);
+                }
+                return result;
+            })
+            .catch((error: Error) => {
+              setNotification(error.message, 'error');
+              return undefined;
+            });
+
+        setLoading(false);
+
+        return returnObject;
     };
 
     const postRequest = async <T> (url: string, body: unknown): Promise<T | undefined>  => {
@@ -67,7 +76,7 @@ export const userRequest = () => {
     return {
         loading,
         authRequest,
-        getRequest,
+        request,
         postRequest,
     };
 };
