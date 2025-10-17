@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { ProductType } from "../../modules/product/types/ProductType";
+import { ProductType } from "../components/types/ProductType";
 
 
 interface DataContext {
