@@ -1,22 +1,22 @@
 import { useState } from 'react';
 
 import Button from '../../../shared/components/buttons/button/Button';
+import SVGLogo from '../../../shared/components/icons/SVGLogo';
 import Input from '../../../shared/components/input/Input';
-import SVGLogo from '../../../shared/components/icons/SVGLogo'; 
-import { 
-    BackgroundImage, 
-    ContainerLogin, 
-    ContainerLoginScreen, 
-    LimitedContainer, 
-    TitleLogin, 
+import { useRequests } from '../../../shared/hooks/useRequest';
+import {
+    BackgroundImage,
+    ContainerLogin,
+    ContainerLoginScreen,
+    LimitedContainer,
+    TitleLogin,
 } from "../styles/loginScreen.styles";
-import { userRequest } from '../../../shared/hooks/useRequest';
 
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { authRequest, loading } = userRequest();
+    const { authRequest, loading } = useRequests();
 
     const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);

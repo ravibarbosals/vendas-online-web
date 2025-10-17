@@ -1,16 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthType } from "../../modules/login/types/AuthType";
+import { ProductRoutesEnum } from "../../modules/product/routes";
+import { ERROR_INVALID_PASSWORD } from "../constants/errorsStatus";
+import { URL_AUTH } from "../constants/urls";
+import { setAuthorizationToken } from "../functions/connection/auth";
 import ConnectionAPI, { connectionAPIPost, MethodType } from "../functions/connection/connectionAPI";
 import { useGlobalContext } from "./useGlobalContext";
-import { URL_AUTH } from "../constants/urls";
-import { ERROR_INVALID_PASSWORD } from "../constants/errorsStatus";
-import { useNavigate } from "react-router-dom";
-import { ProductRoutesEnum } from "../../modules/product/routes";
-import { setAuthorizationToken } from "../functions/connection/auth";
-import { AuthType } from "../../modules/login/types/AuthType";
 
-export const userRequest = () => {
+export const useRequests = () => {
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
     const { setNotification, setUser } = useGlobalContext();
 
 
@@ -41,6 +40,7 @@ export const userRequest = () => {
 
 
     const authRequest = async (body: unknown): Promise<void>  => {
+      const navigate = useNavigate();
       setLoading(true);
 
         await connectionAPIPost<AuthType>(URL_AUTH,body)

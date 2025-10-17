@@ -1,24 +1,35 @@
-import { createBrowserRouter, RouteObject, RouterProvider, useNavigate } from 'react-router-dom';
+import { createBrowserRouter, RouteObject, RouterProvider } from 'react-router-dom';
 
-import { loginRoutes } from './modules/login/routes';
-import { useNotification } from './shared/hooks/useNotification';
 import { firstScreenRoutes } from './modules/firstScreen/routes';
+import { loginRoutes } from './modules/login/routes';
 import { productScreen } from './modules/product/routes';
-import { useGlobalContext } from './shared/hooks/useGlobalContext';
 import { verifyLoggedIn } from './shared/functions/connection/auth';
+import { useNotification } from './shared/hooks/useNotification';
+import { useRequests } from './shared/hooks/useRequest';
+import { URL_USER } from './shared/constants/urls';
+import { MethodsEnum } from './shared/enums/methods.enum';
+import { useEffect } from 'react';
+import { useGlobalContext } from './shared/hooks/useGlobalContext';
 
-
-function App() {
-  const { contextHolder } = useNotification();
-  const { user, setUser } = useGlobalContext();
 
   const routes: RouteObject[] = [...loginRoutes];
   const routesLoggedIn: RouteObject[] = [...productScreen, ...firstScreenRoutes].map((route) => ({
       ...route,
-      loader: () => verifyLoggedIn(setUser, user),
+      loader: verifyLoggedIn,
     }));
 
   const router = createBrowserRouter ([...routes, ...routesLoggedIn]);
+
+
+
+function App() {
+  const { contextHolder } = useNotification();
+  const { setUser } = useGlobalContext();
+  const { request } = useRequests();
+
+  useEffect(() => {
+    request(URL_USER, MethodsEnum.GET, setUser);
+  }, []);
 
   return (
     <>

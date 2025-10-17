@@ -12,7 +12,7 @@ const navigate = useNavigate();
         if (user) {
             navigate(ProductRoutesEnum.PRODUCT)
         } 
-    }, []);
+    }, [user]);
 
     return <Spin />;
 };
