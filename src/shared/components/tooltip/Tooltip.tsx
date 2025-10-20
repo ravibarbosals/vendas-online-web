@@ -10,7 +10,7 @@ interface TooltipProps {
 
 const Tooltip = ({ children, tooltip, title}: TooltipProps) => {
     if(title) {
-        <TooltipAntd title={title}>{children}</TooltipAntd>
+        <TooltipAntd title={title}>{children}</TooltipAntd>;
     }
     
     return(

@@ -3,7 +3,7 @@ import  Tooltip  from '../../../shared/components/tooltip/Tooltip';
 import { ImageProduct } from "../styles/tooltipImage.style";
 
 interface TooltipImageProps {
-    product: ProductType
+    product: ProductType;
 }
 
 const TooltipImage = ({ product }: TooltipImageProps) => {
