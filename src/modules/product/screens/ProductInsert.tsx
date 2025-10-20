@@ -6,17 +6,16 @@ const ProductInsert = () => {
     <Screen 
     listBreadcrumb={[
         {
-            name: 'HOME',
-        },
-        {
-            name: 'PRODUTOS',
-            navigateTo: ProductRoutesEnum.PRODUCT,
-        },
-        {
-            name: 'INSERIR PRODUTO',
-        },
-    ]}>Inserir Produto
-    </Screen>
+        name: 'HOME',
+    },
+    {
+        name: 'PRODUTOS',
+        navigateTo: ProductRoutesEnum.PRODUCT,
+    },
+    {
+        name: 'INSERIR PRODUTO',
+    },
+    ]}>Inserir Produto</Screen>
 );
 };
 
