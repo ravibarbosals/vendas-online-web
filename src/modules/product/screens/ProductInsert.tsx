@@ -1,16 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Button from "../../../shared/components/buttons/button/Button";
 import Screen from "../../../shared/components/screen/Screen";
-import { ProductRoutesEnum } from "../routes";
+import { URL_CATEGORY, URL_PRODUCT } from "../../../shared/constants/urls";
+import { MethodsEnum } from "../../../shared/enums/methods.enum";
 import { useDataContext } from "../../../shared/hooks/useDataContext";
 import { useRequests } from "../../../shared/hooks/useRequest";
-import { MethodsEnum } from "../../../shared/enums/methods.enum";
-import { URL_CATEGORY } from "../../../shared/constants/urls";
+import { ProductRoutesEnum } from "../routes";
 import { LimitedContainer } from "../styles/productInsert.style";
-import Input from "../../../shared/components/input/Input";
-import Button from "../../../shared/components/buttons/button/Button";
-import { Select } from "antd";
+import Input from "../../../shared/components/inputs/input/Input";
+import { InsertProduct } from "../../../shared/dtos/InsertProduct.dto";
+import Select from "../../../shared/components/inputs/select/Select";
+import { connectionAPIPost } from "../../../shared/functions/connection/connectionAPI";
 
 const ProductInsert = () => {
+    const [product ,setProduct] = useState<InsertProduct>({
+        name: '',
+        price: 0,
+        image: '',
+    });
         const { categories, setCategories } = useDataContext();
         const { request } = useRequests();
 
@@ -20,8 +27,28 @@ const ProductInsert = () => {
             }
         }, []);
 
+        const handleInsertProduct = () => {
+            connectionAPIPost(URL_PRODUCT, product)
+        }
+
+        const onChange = (event: React.ChangeEvent<HTMLInputElement>, nameObject:string) => {
+            setProduct({
+                ...product,
+                [nameObject]: event.target.value
+            })
+        }
+        const onChangePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setProduct({
+                ...product,
+                price: Number(event.target.value),
+            })
+        }
+
         const handleChange = (value: string) => {
-        console.log(`selected ${value}`);
+            setProduct({
+                ...product,
+                categoryId: Number(value),
+            });
         };
 
     return ( 
@@ -40,20 +67,38 @@ const ProductInsert = () => {
     ]}
     >
         <LimitedContainer>
-            <Input margin="0px 0px 16px 0px" title="Nome" placeholder=""/>
-            <Input margin="0px 0px 16px 0px" title="Url imagem" placeholder="Url imagem" />
-            <Input margin="0px 0px 16px 0px" title="Preço" placeholder="Preço" />
+            <Input onChange={(event) => onChange(event, 'name')}
+            value={product.name}
+            margin="0px 0px 16px 0px" 
+            title="Nome" 
+            placeholder="Nome"
+            />
+            <Input onChange={(event) => onChange(event, 'image')}
+            value={product.image}
+            margin="0px 0px 16px 0px" 
+            title="Url imagem" 
+            placeholder="Url imagem"
+            />
+            <Input 
+            onChange={onChangePrice}
+            value={product.price}
+            margin="0px 0px 16px 0px" 
+            title="Preço" 
+            placeholder="Preço" 
+            />
             <Select
-                defaultValue="lucy"
-                style={{ width: '100%'}}
-                onChange={handleChange}
-                options={
-                    categories.map((category) => ({
-                        value: `${category.id}`,
-                        label: `${category.name}`,
-                    }))}
+            title='Categoria'
+            margin ="0px 0px 32px 0px"
+            onChange={handleChange}
+            options={
+                categories.map((category) => ({
+                    value: `${category.id}`,
+                    label: `${category.name}`,
+            }))}
                 />
-            <Button type="primary">Inserir produto</Button>
+            <Button onClick={handleInsertProduct} type="primary">
+                Inserir produto
+                </Button>
         </LimitedContainer>
     </Screen>
     );

@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import Button from '../../../shared/components/buttons/button/Button';
 import SVGLogo from '../../../shared/components/icons/SVGLogo';
-import Input from '../../../shared/components/input/Input';
 import { useRequests } from '../../../shared/hooks/useRequest';
+import Input from '../../../shared/components/inputs/input/Input';
 import {
     BackgroundImage,
     ContainerLogin,
