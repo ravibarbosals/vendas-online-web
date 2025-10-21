@@ -15,6 +15,7 @@ import { LimitedContainer } from "../../../shared/components/styles/limited.styl
 import { DisplayFlexJustifyRight } from "../../../shared/components/styles/display.styled";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../../shared/hooks/useGlobalContext";
+import InputMoney from "../../../shared/components/inputs/inputMoney/InputMoney";
 
 const ProductInsert = () => {
     const [product ,setProduct] = useState<InsertProduct>({
@@ -94,7 +95,7 @@ const ProductInsert = () => {
             title="Url imagem" 
             placeholder="Url imagem"
             />
-            <Input onChange={(event) => onChange(event, 'price', true)}
+            <InputMoney onChange={(event) => onChange(event, 'price', true)}
             value={product.price}
             margin="0px 0px 16px 0px" 
             title="Preço" 
