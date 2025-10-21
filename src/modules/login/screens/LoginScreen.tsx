@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Button from '../../../shared/components/buttons/button/Button';
 import SVGLogo from '../../../shared/components/icons/SVGLogo';
@@ -14,6 +15,7 @@ import {
 
 
 const LoginScreen = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { authRequest, loading } = useRequests();
@@ -27,7 +29,7 @@ const LoginScreen = () => {
     };
 
     const handleLogin = () => {
-        authRequest({
+        authRequest(navigate, {
                 email: email,
                 password: password,
         });

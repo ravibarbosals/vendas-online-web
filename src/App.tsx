@@ -3,7 +3,7 @@ import { createBrowserRouter, RouteObject, RouterProvider } from 'react-router-d
 import { firstScreenRoutes } from './modules/firstScreen/routes';
 import { loginRoutes } from './modules/login/routes';
 import { productScreen } from './modules/product/routes';
-import { verifyLoggedIn } from './shared/functions/connection/auth';
+import { getAuthorizationToken, verifyLoggedIn } from './shared/functions/connection/auth';
 import { useNotification } from './shared/hooks/useNotification';
 import { useRequests } from './shared/hooks/useRequest';
 import { URL_USER } from './shared/constants/urls';
@@ -28,7 +28,10 @@ function App() {
   const { request } = useRequests();
 
   useEffect(() => {
+    const token = getAuthorizationToken();
+    if(token) {
     request(URL_USER, MethodsEnum.GET, setUser);
+    }
   }, []);
 
   return (
