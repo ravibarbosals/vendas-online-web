@@ -6,11 +6,15 @@ import { MethodsEnum } from "../../../shared/enums/methods.enum";
 import { useDataContext } from "../../../shared/hooks/useDataContext";
 import { useRequests } from "../../../shared/hooks/useRequest";
 import { ProductRoutesEnum } from "../routes";
-import { LimitedContainer } from "../styles/productInsert.style";
+import { ProductInsertContainer } from "../styles/productInsert.style";
 import Input from "../../../shared/components/inputs/input/Input";
 import { InsertProduct } from "../../../shared/dtos/InsertProduct.dto";
 import Select from "../../../shared/components/inputs/select/Select";
 import { connectionAPIPost } from "../../../shared/functions/connection/connectionAPI";
+import { LimitedContainer } from "../../../shared/components/styles/limited.styled";
+import { DisplayFlexJustifyRight } from "../../../shared/components/styles/display.styled";
+import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../../shared/hooks/useGlobalContext";
 
 const ProductInsert = () => {
     const [product ,setProduct] = useState<InsertProduct>({
@@ -19,7 +23,9 @@ const ProductInsert = () => {
         image: '',
     });
         const { categories, setCategories } = useDataContext();
+        const { setNotification } = useGlobalContext();
         const { request } = useRequests();
+        const navigate = useNavigate();
 
         useEffect(() => {
             if (categories.length === 0) {
@@ -27,22 +33,30 @@ const ProductInsert = () => {
             }
         }, []);
 
-        const handleInsertProduct = () => {
-            connectionAPIPost(URL_PRODUCT, product)
-        }
+        const handleInsertProduct = async () => {
+            await connectionAPIPost(URL_PRODUCT, product)
+                .then(() => {
+                    setNotification('Sucesso!', 'success', 'Produto inserido com sucesso!')
+                    navigate(ProductRoutesEnum.PRODUCT)
+                })
+                .catch((error: Error) => {
+                    setNotification(error.message, "error");
+                });
+        };
 
-        const onChange = (event: React.ChangeEvent<HTMLInputElement>, nameObject:string) => {
+        const hadleOnClickCancel = () => {
+            navigate(ProductRoutesEnum.PRODUCT);
+        };
+
+        const onChange = (event: React.ChangeEvent<HTMLInputElement>, 
+            nameObject:string, 
+            isNumber?: boolean,
+        ) => {
             setProduct({
                 ...product,
-                [nameObject]: event.target.value
-            })
-        }
-        const onChangePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-            setProduct({
-                ...product,
-                price: Number(event.target.value),
-            })
-        }
+                [nameObject]: isNumber ? Number(event.target.value) : event.target.value,
+            });
+        };
 
         const handleChange = (value: string) => {
             setProduct({
@@ -66,7 +80,8 @@ const ProductInsert = () => {
         },
     ]}
     >
-        <LimitedContainer>
+        <ProductInsertContainer>
+        <LimitedContainer width={400}>
             <Input onChange={(event) => onChange(event, 'name')}
             value={product.name}
             margin="0px 0px 16px 0px" 
@@ -79,8 +94,7 @@ const ProductInsert = () => {
             title="Url imagem" 
             placeholder="Url imagem"
             />
-            <Input 
-            onChange={onChangePrice}
+            <Input onChange={(event) => onChange(event, 'price', true)}
             value={product.price}
             margin="0px 0px 16px 0px" 
             title="Preço" 
@@ -95,11 +109,21 @@ const ProductInsert = () => {
                     value: `${category.id}`,
                     label: `${category.name}`,
             }))}
-                />
-            <Button onClick={handleInsertProduct} type="primary">
-                Inserir produto
-                </Button>
+            />
+            <DisplayFlexJustifyRight>
+                <LimitedContainer margin='0px 8px'width={120}>
+                    <Button danger onClick={hadleOnClickCancel}>
+                        Cancelar
+                    </Button>
+                </LimitedContainer>
+                <LimitedContainer width={120}>
+                    <Button onClick={handleInsertProduct} type="primary">
+                        Inserir produto
+                    </Button>
+                </LimitedContainer>
+            </DisplayFlexJustifyRight>
         </LimitedContainer>
+    </ProductInsertContainer>
     </Screen>
     );
 };
