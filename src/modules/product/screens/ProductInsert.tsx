@@ -14,20 +14,14 @@ import { DisplayFlexJustifyRight } from "../../../shared/components/styles/displ
 import { useNavigate } from "react-router-dom";
 import InputMoney from "../../../shared/components/inputs/inputMoney/InputMoney";
 import { userInsertProduct } from "../hooks/useInsertProduct";
+import { useCategory } from "../../category/hooks/useCategory";
 
 const ProductInsert = () => {
         const {product, loading, disableButton, onChangeInput, handleInsertProduct, handleChangeSelect} = 
             userInsertProduct();
-        const { categories, setCategories } = useDataContext();
+        const { categories } = useCategory();
 
-        const { request } = useRequests();
         const navigate = useNavigate();
-
-        useEffect(() => {
-            if (categories.length === 0) {
-                request(URL_CATEGORY, MethodsEnum.GET, setCategories);
-            }
-        }, []);
 
         const hadleOnClickCancel = () => {
             navigate(ProductRoutesEnum.PRODUCT);

@@ -10,10 +10,15 @@ import { URL_USER } from './shared/constants/urls';
 import { MethodsEnum } from './shared/enums/methods.enum';
 import { useEffect } from 'react';
 import { useGlobalContext } from './shared/hooks/useGlobalContext';
+import { categoryScreens } from './modules/category/routes';
 
 
   const routes: RouteObject[] = [...loginRoutes];
-  const routesLoggedIn: RouteObject[] = [...productScreen, ...firstScreenRoutes].map((route) => ({
+  const routesLoggedIn: RouteObject[] = [
+    ...productScreen, 
+    ...categoryScreens , 
+    ...firstScreenRoutes,
+  ].map((route) => ({
       ...route,
       loader: verifyLoggedIn,
     }));
