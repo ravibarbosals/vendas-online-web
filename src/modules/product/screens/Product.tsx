@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ProductType } from "../../../shared/components/types/ProductType";
 import { URL_PRODUCT } from "../../../shared/constants/urls";
 import { MethodsEnum } from "../../../shared/enums/methods.enum";
@@ -6,7 +6,7 @@ import { useDataContext } from "../../../shared/hooks/useDataContext";
 import { useRequests } from "../../../shared/hooks/useRequest";
 
 import { Input } from 'antd';
-import type { TableProps } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import Table from "../../../shared/components/table/Table";
 import CategoryColumn from "../components/CategoryColumn";
 import TooltipImage from "../components/TooltipImage";
@@ -20,7 +20,7 @@ import { DisplayFlexJustifyBetween } from "../../../shared/components/styles/dis
 
 const { Search } = Input;
 
-const columns: TableProps<ProductType>['columns'] = [
+const columns: ColumnsType<ProductType> = [
   {
     title: 'Id',
     dataIndex: 'id',
@@ -47,7 +47,8 @@ const columns: TableProps<ProductType>['columns'] = [
     render: (_, product) => <a>{convertNumberToMoney(product.price)}</a>,
   },
   
-];
+]
+
 
 const Product = () => {
     const { products, setProducts } = useDataContext();

@@ -1,4 +1,4 @@
-import { Input, TableProps } from "antd";
+import { Input } from "antd";
 import Screen from "../../../shared/components/screen/Screen";
 import Table from "../../../shared/components/table/Table";
 import { useCategory } from "../hooks/useCategory";
@@ -8,10 +8,11 @@ import Button from "../../../shared/components/buttons/button/Button";
 import { useNavigate } from "react-router-dom";
 import { CategoryRoutesEnum } from "../routes";
 import { DisplayFlexJustifyBetween } from "../../../shared/components/styles/display.styled";
+import { ColumnsType } from "antd/es/table";
 
 const { Search } = Input;
 
-const columns: TableProps<CategoryType>['columns'] = [
+const columns: ColumnsType<CategoryType>= [
   {
     title: 'Id',
     dataIndex: 'id',
@@ -34,18 +35,12 @@ const columns: TableProps<CategoryType>['columns'] = [
 ];
 
 const Category = () => {
-    const { categories } = useCategory();
+    const { categories, handleOnChangeSearch } = useCategory();
     const navigate = useNavigate();
 
     const handleOnClickCategory = () => {
         navigate(CategoryRoutesEnum.CATEGORY_INSERT)
     }
-
-    const handleOnsearch = (value: string) => {
-
-    }
-
-
 
     return ( 
     <Screen
@@ -60,7 +55,7 @@ const Category = () => {
     >
         <DisplayFlexJustifyBetween margin="0px 0px 16px 0px">
         <LimitedContainer width={240}>
-          <Search placeholder="Buscar categoria" onSearch={handleOnsearch} enterButton />
+          <Search placeholder="Buscar categoria" onSearch={handleOnChangeSearch} enterButton />
         </LimitedContainer>
 
         <LimitedContainer width={120}>

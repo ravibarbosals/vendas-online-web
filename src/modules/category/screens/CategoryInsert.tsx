@@ -9,7 +9,7 @@ import { CategoryRoutesEnum } from "../routes";
 
 const CategoryInsert = () => {
 
-    const { name, loading, handleChangeName, insertCategory } = userInsertCategory();
+    const { name, loading, handleChangeName, disabledButton , insertCategory } = userInsertCategory();
     const navigate = useNavigate();
 
     const handleOnClickCancel = () => {
@@ -39,13 +39,18 @@ const CategoryInsert = () => {
         />
         <DisplayFlexJustifyRight>
                 <LimitedContainer margin='0px 8px'width={120}>
-                    <Button onClick={handleOnClickCancel} danger>
+                    <Button loading={loading} onClick={insertCategory} danger>
                         Cancelar
                     </Button>
                 </LimitedContainer>
                 <LimitedContainer width={160}>
-                    <Button loading={loading} onClick={insertCategory} type="primary">
-                        Inserir categoria
+                    <Button 
+                    disabled={disabledButton} 
+                    loading={loading} 
+                    onClick={insertCategory} 
+                    type="primary"
+                    >
+                    Inserir categoria
                     </Button>
                 </LimitedContainer>
             </DisplayFlexJustifyRight>
