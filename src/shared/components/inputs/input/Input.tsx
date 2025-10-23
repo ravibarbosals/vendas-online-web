@@ -1,6 +1,7 @@
 import type { InputProps as InputPropsAntd } from 'antd';
 import { Input as InputAntd } from 'antd';
 
+import { InputTestIdEnum } from './__tests__/inputTestIdEnum';
 import { BoxInput, TitleInput } from './input.styled';
 
 export interface InputProps extends InputPropsAntd {
@@ -10,8 +11,8 @@ export interface InputProps extends InputPropsAntd {
 
 const Input = ({ title, margin, ...props }: InputProps) => {
   return (
-    <BoxInput style={{ margin }}>
-      {title && <TitleInput>{title}</TitleInput>}
+    <BoxInput data-testid={InputTestIdEnum.BOX_INPUT} style={{ margin }}>
+      {title && <TitleInput data-testid={InputTestIdEnum.INPUT_TITLE}>{title}</TitleInput>}
       <InputAntd {...props} />
     </BoxInput>
   );

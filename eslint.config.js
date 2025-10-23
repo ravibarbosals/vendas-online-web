@@ -15,7 +15,7 @@ export default [
   pluginReactConfig,
   configPrettier,
 
- 
+
   {
     files: ['src/**/*.{js,mjs,cjs,ts,jsx,tsx}'], 
     plugins: {
