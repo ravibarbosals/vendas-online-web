@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductType } from "../../../shared/components/types/ProductType";
 import { URL_PRODUCT } from "../../../shared/constants/urls";
 import { MethodsEnum } from "../../../shared/enums/methods.enum";
-import { useDataContext } from "../../../shared/hooks/useDataContext";
 import { useRequests } from "../../../shared/hooks/useRequest";
 
 import { Input } from 'antd';
@@ -17,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { ProductRoutesEnum } from "../routes";
 import { LimitedContainer } from "../../../shared/components/styles/limited.styled";
 import { DisplayFlexJustifyBetween } from "../../../shared/components/styles/display.styled";
+import { useProductReducer } from "../../../store/reducers/productReducer/useProductReducer";
 
 const { Search } = Input;
 
@@ -51,7 +51,8 @@ const columns: ColumnsType<ProductType> = [
 
 
 const Product = () => {
-    const { products, setProducts } = useDataContext();
+  const { products , setProducts } = useProductReducer()
+
     const [ productsFiltered, setProductsFiltrered] = useState<ProductType[]>([]);
     const { request } = useRequests();
     const navigate = useNavigate();
