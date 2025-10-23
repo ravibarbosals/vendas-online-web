@@ -1,66 +1,68 @@
-import { useEffect, useState } from "react";
-import { InsertProduct } from "../../../shared/dtos/InsertProduct.dto";
-import { connectionAPIPost } from "../../../shared/functions/connection/connectionAPI";
-import { URL_PRODUCT } from "../../../shared/constants/urls";
-import { ProductRoutesEnum } from "../routes";
-import { useNavigate } from "react-router-dom";
-import { useGlobalReducer } from "../../../store/reducers/globalReducer/useGlobalReducer";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { URL_PRODUCT } from '../../../shared/constants/urls';
+import { InsertProduct } from '../../../shared/dtos/InsertProduct.dto';
+import { connectionAPIPost } from '../../../shared/functions/connection/connectionAPI';
+import { useGlobalReducer } from '../../../store/reducers/globalReducer/useGlobalReducer';
+import { ProductRoutesEnum } from '../routes';
 
 export const userInsertProduct = () => {
-    const { setNotification } = useGlobalReducer();
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
-    const [disableButton, setDisabledButton] = useState(true);
-    const [product ,setProduct] = useState<InsertProduct>({
-        name: '',
-        price: 0,
-        image: '',
+  const { setNotification } = useGlobalReducer();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [disableButton, setDisabledButton] = useState(true);
+  const [product, setProduct] = useState<InsertProduct>({
+    name: '',
+    price: 0,
+    image: '',
+  });
+
+  useEffect(() => {
+    if (product.name && product.categoryId && product.image && product.price > 0) {
+      setDisabledButton(false);
+    } else {
+      setDisabledButton(true);
+    }
+  }, [product]);
+
+  const onChangeInput = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    nameObject: string,
+    isNumber?: boolean,
+  ) => {
+    setProduct({
+      ...product,
+      [nameObject]: isNumber ? Number(event.target.value) : event.target.value,
     });
+  };
 
-    useEffect(() => {
-        if (product.name && product.categoryId && product.image && product.price > 0) {
-            setDisabledButton(false)
-        } else {
-            setDisabledButton(true);
-        }
-    }, [product]);
+  const handleChangeSelect = (value: string) => {
+    setProduct({
+      ...product,
+      categoryId: Number(value),
+    });
+  };
 
-    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>, 
-            nameObject:string, 
-            isNumber?: boolean,
-        ) => {
-            setProduct({
-                ...product,
-                [nameObject]: isNumber ? Number(event.target.value) : event.target.value,
-            });
-        };
+  const handleInsertProduct = async () => {
+    setLoading(true);
+    await connectionAPIPost(URL_PRODUCT, product)
+      .then(() => {
+        setNotification('Sucesso!', 'success', 'Produto inserido com sucesso!');
+        navigate(ProductRoutesEnum.PRODUCT);
+      })
+      .catch((error: Error) => {
+        setNotification(error.message, 'error');
+      });
+    setLoading(false);
+  };
 
-        const handleChangeSelect = (value: string) => {
-            setProduct({
-                ...product,
-                categoryId: Number(value),
-            });
-        };
-
-    const handleInsertProduct = async () => {
-        setLoading(true);
-            await connectionAPIPost(URL_PRODUCT, product)
-                .then(() => {
-                    setNotification('Sucesso!', 'success', 'Produto inserido com sucesso!')
-                    navigate(ProductRoutesEnum.PRODUCT)
-                })
-                .catch((error: Error) => {
-                    setNotification(error.message, "error");
-                });
-                setLoading(false);
-            };
-
-    return {
-        product,
-        loading,
-        disableButton,
-        onChangeInput,
-        handleInsertProduct,
-        handleChangeSelect,
-    };
+  return {
+    product,
+    loading,
+    disableButton,
+    onChangeInput,
+    handleInsertProduct,
+    handleChangeSelect,
+  };
 };

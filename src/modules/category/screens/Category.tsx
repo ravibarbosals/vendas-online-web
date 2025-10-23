@@ -1,18 +1,19 @@
-import { Input } from "antd";
-import { ColumnsType } from "antd/es/table";
-import { useNavigate } from "react-router-dom";
-import Button from "../../../shared/components/buttons/button/Button";
-import Screen from "../../../shared/components/screen/Screen";
-import { DisplayFlexJustifyBetween } from "../../../shared/components/styles/display.styled";
-import { LimitedContainer } from "../../../shared/components/styles/limited.styled";
-import Table from "../../../shared/components/table/Table";
-import { CategoryType } from "../../../shared/types/CategoryType";
-import { useCategory } from "../hooks/useCategory";
-import { CategoryRoutesEnum } from "../routes";
+import { Input } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import { useNavigate } from 'react-router-dom';
+
+import Button from '../../../shared/components/buttons/button/Button';
+import Screen from '../../../shared/components/screen/Screen';
+import { DisplayFlexJustifyBetween } from '../../../shared/components/styles/display.styled';
+import { LimitedContainer } from '../../../shared/components/styles/limited.styled';
+import Table from '../../../shared/components/table/Table';
+import { CategoryType } from '../../../shared/types/CategoryType';
+import { useCategory } from '../hooks/useCategory';
+import { CategoryRoutesEnum } from '../routes';
 
 const { Search } = Input;
 
-const columns: ColumnsType<CategoryType>= [
+const columns: ColumnsType<CategoryType> = [
   {
     title: 'Id',
     dataIndex: 'id',
@@ -35,38 +36,38 @@ const columns: ColumnsType<CategoryType>= [
 ];
 
 const Category = () => {
-    const { categories, handleOnChangeSearch } = useCategory();
-    const navigate = useNavigate();
+  const { categories, handleOnChangeSearch } = useCategory();
+  const navigate = useNavigate();
 
-    const handleOnClickCategory = () => {
-        navigate(CategoryRoutesEnum.CATEGORY_INSERT)
-    }
+  const handleOnClickCategory = () => {
+    navigate(CategoryRoutesEnum.CATEGORY_INSERT);
+  };
 
-    return ( 
+  return (
     <Screen
-    listBreadcrumb={[
+      listBreadcrumb={[
         {
-            name: 'HOME',
+          name: 'HOME',
         },
         {
-            name: 'CATEGORIAS',
+          name: 'CATEGORIAS',
         },
-    ]}
+      ]}
     >
-        <DisplayFlexJustifyBetween margin="0px 0px 16px 0px">
+      <DisplayFlexJustifyBetween margin="0px 0px 16px 0px">
         <LimitedContainer width={240}>
           <Search placeholder="Buscar categoria" onSearch={handleOnChangeSearch} enterButton />
         </LimitedContainer>
 
         <LimitedContainer width={120}>
           <Button type="primary" onClick={handleOnClickCategory}>
-          Inserir
+            Inserir
           </Button>
         </LimitedContainer>
-        </DisplayFlexJustifyBetween>
-        <Table columns={columns} dataSource={categories} />
+      </DisplayFlexJustifyBetween>
+      <Table columns={columns} dataSource={categories} />
     </Screen>
-    );
+  );
 };
 
 export default Category;

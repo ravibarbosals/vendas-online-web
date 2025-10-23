@@ -1,86 +1,89 @@
-import { ContainerLogoName, ContainerMenu, LogoMenu, NameCompany } from "./menu.style";
-import React, { useState } from 'react';
-import { HomeOutlined, LaptopOutlined, ProfileOutlined, SafetyCertificateOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import type { MenuProps,  } from 'antd';
-import { Menu as MenuAntd,  } from 'antd';
-import { useNavigate } from "react-router-dom";
-import { ProductRoutesEnum } from "../../../modules/product/routes";
-import { CategoryRoutesEnum } from "../../../modules/category/routes";
+import {
+  HomeOutlined,
+  LaptopOutlined,
+  ProfileOutlined,
+  SafetyCertificateOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { Menu as MenuAntd } from 'antd';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { CategoryRoutesEnum } from '../../../modules/category/routes';
+import { ProductRoutesEnum } from '../../../modules/product/routes';
+import { ContainerLogoName, ContainerMenu, LogoMenu, NameCompany } from './menu.style';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 const Menu = () => {
-    const navigate = useNavigate();
-    const [current, setCurrent] = useState('1');
+  const navigate = useNavigate();
+  const [current, setCurrent] = useState('1');
 
-    const items: MenuItem[] = [
+  const items: MenuItem[] = [
+    {
+      key: 'home',
+      label: 'Principal',
+      icon: <HomeOutlined />,
+    },
+    {
+      key: 'products',
+      label: 'Produtos',
+      icon: <LaptopOutlined />,
+      children: [
         {
-        key: 'home',
-        label: 'Principal',
-        icon: <HomeOutlined/>,
+          key: 'products_view',
+          label: 'Visualizar',
+          onClick: () => navigate(ProductRoutesEnum.PRODUCT),
         },
         {
-        key: 'products',
-        label: 'Produtos',
-        icon: <LaptopOutlined />,
-        children: [
-            { 
-                key: 'products_view', 
-                label: 'Visualizar',
-                onClick: () => navigate(ProductRoutesEnum.PRODUCT),
-            },
-            { 
-                key: 'products_insert', 
-                label: 'Inserir',
-                onClick: () => navigate(ProductRoutesEnum.PRODUCT_INSERT),
-            },
-        ],
+          key: 'products_insert',
+          label: 'Inserir',
+          onClick: () => navigate(ProductRoutesEnum.PRODUCT_INSERT),
         },
+      ],
+    },
 
+    {
+      key: 'categories',
+      label: 'Categoria',
+      icon: <ProfileOutlined />,
+      children: [
         {
-        key: 'categories',
-        label: 'Categoria',
-        icon: <ProfileOutlined />,
-        children: [
-            { 
-                key: 'category_view', 
-                label: 'Visualizar',
-                onClick: () => navigate(CategoryRoutesEnum.CATEGORY),
-            },
-            { 
-                key: 'category_insert', 
-                label: 'Inserir',
-                onClick: () => navigate(CategoryRoutesEnum.CATEGORY_INSERT),
-            },
-        ],
+          key: 'category_view',
+          label: 'Visualizar',
+          onClick: () => navigate(CategoryRoutesEnum.CATEGORY),
         },
         {
-        key: 'order',
-        label: 'Pedidos',
-        icon: <SafetyCertificateOutlined/>,
+          key: 'category_insert',
+          label: 'Inserir',
+          onClick: () => navigate(CategoryRoutesEnum.CATEGORY_INSERT),
         },
-        {
-        key: 'user',
-        label: 'Clientes',
-        icon: <UserOutlined/>,
-        },
+      ],
+    },
+    {
+      key: 'order',
+      label: 'Pedidos',
+      icon: <SafetyCertificateOutlined />,
+    },
+    {
+      key: 'user',
+      label: 'Clientes',
+      icon: <UserOutlined />,
+    },
+  ];
 
-        
-    
-        
-];
-
-    const onClick: MenuProps['onClick'] = (e) => {
+  const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key);
-    };
+  };
 
-    return (
+  return (
     <ContainerMenu>
-        <ContainerLogoName>
-        <LogoMenu/>
-    <NameCompany>Vendas Online</NameCompany>
-        </ContainerLogoName>
-        <MenuAntd
+      <ContainerLogoName>
+        <LogoMenu />
+        <NameCompany>Vendas Online</NameCompany>
+      </ContainerLogoName>
+      <MenuAntd
         theme="dark"
         onClick={onClick}
         style={{ width: 240 }}
@@ -90,7 +93,7 @@ const Menu = () => {
         items={items}
       />
     </ContainerMenu>
-    );
+  );
 };
 
 export default Menu;

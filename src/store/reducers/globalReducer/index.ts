@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { UserType } from '../../../modules/login/types/UserType';
 import { NotificationType } from '../../../shared/types/NotificationType';
 
@@ -9,14 +10,13 @@ export interface GlobalState {
 
 const initialState: GlobalState = {
   notification: undefined,
-  user: undefined
+  user: undefined,
 };
 
 export const counterSlice = createSlice({
   name: 'globalReducer',
   initialState,
   reducers: {
-  
     setNotificationAction: (state, action: PayloadAction<NotificationType>) => {
       state.notification = action.payload;
     },
@@ -26,6 +26,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { setNotificationAction, setUserAction } = counterSlice.actions
+export const { setNotificationAction, setUserAction } = counterSlice.actions;
 
-export default counterSlice.reducer
+export default counterSlice.reducer;

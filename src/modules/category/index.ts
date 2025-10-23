@@ -1,3 +1,3 @@
-import Category from "./screens/Category";
+import Category from './screens/Category';
 
 export default Category;

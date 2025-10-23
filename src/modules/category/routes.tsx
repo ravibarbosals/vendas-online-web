@@ -1,11 +1,11 @@
-import { type RouteObject} from "react-router-dom";
+import { type RouteObject } from 'react-router-dom';
 
-import Category from "./";
-import CategoryInsert from "./screens/CategoryInsert";
+import Category from './';
+import CategoryInsert from './screens/CategoryInsert';
 
 export enum CategoryRoutesEnum {
   CATEGORY = '/category',
-  CATEGORY_INSERT = '/category/insert'
+  CATEGORY_INSERT = '/category/insert',
 }
 
 export const categoryScreens: RouteObject[] = [
@@ -17,4 +17,4 @@ export const categoryScreens: RouteObject[] = [
     path: CategoryRoutesEnum.CATEGORY_INSERT,
     element: <CategoryInsert />,
   },
-  ];
+];

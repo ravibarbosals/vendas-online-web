@@ -1,7 +1,7 @@
-import { type RouteObject} from "react-router-dom";
+import { type RouteObject } from 'react-router-dom';
 
-import FirstScreen from "./screens/FirstScreen";
-import PageNotFound from "./screens/PageNotFound";
+import FirstScreen from './screens/FirstScreen';
+import PageNotFound from './screens/PageNotFound';
 
 export enum FirstScreenRoutesEnum {
   FIRST_SCREEN = '/',
@@ -13,4 +13,4 @@ export const firstScreenRoutes: RouteObject[] = [
     element: <FirstScreen />,
     errorElement: <PageNotFound />,
   },
-  ];
+];

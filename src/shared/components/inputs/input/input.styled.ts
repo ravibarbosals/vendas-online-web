@@ -1,13 +1,11 @@
-import styled from 'styled-components';
 import { Typography } from 'antd';
+import styled from 'styled-components';
 
 const { Text } = Typography;
 export const BoxInput = styled.div`
-    width: 100%;
-`
-
+  width: 100%;
+`;
 
 export const TitleInput = styled(Text)`
-    
-    margin-left: 8px;
+  margin-left: 8px;
 `;

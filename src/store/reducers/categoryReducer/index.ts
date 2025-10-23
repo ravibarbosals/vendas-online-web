@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { CategoryType } from '../../../shared/types/CategoryType';
 
 export interface CategorytState {
@@ -19,6 +20,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { setCategoriesAction } = counterSlice.actions
+export const { setCategoriesAction } = counterSlice.actions;
 
-export default counterSlice.reducer
+export default counterSlice.reducer;
