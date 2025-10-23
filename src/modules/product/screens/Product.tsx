@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
-import { ProductType } from "../../../shared/components/types/ProductType";
 import { URL_PRODUCT } from "../../../shared/constants/urls";
 import { MethodsEnum } from "../../../shared/enums/methods.enum";
 import { useRequests } from "../../../shared/hooks/useRequest";
+import { ProductType } from "../../../shared/types/ProductType";
 
 import { Input } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { useNavigate } from "react-router-dom";
+import Button from "../../../shared/components/buttons/button/Button";
+import Screen from "../../../shared/components/screen/Screen";
+import { DisplayFlexJustifyBetween } from "../../../shared/components/styles/display.styled";
+import { LimitedContainer } from "../../../shared/components/styles/limited.styled";
 import Table from "../../../shared/components/table/Table";
+import { convertNumberToMoney } from "../../../shared/functions/money";
+import { useProductReducer } from "../../../store/reducers/productReducer/useProductReducer";
 import CategoryColumn from "../components/CategoryColumn";
 import TooltipImage from "../components/TooltipImage";
-import { convertNumberToMoney } from "../../../shared/functions/money";
-import Screen from "../../../shared/components/screen/Screen";
-import Button from "../../../shared/components/buttons/button/Button";
-import { useNavigate } from "react-router-dom";
 import { ProductRoutesEnum } from "../routes";
-import { LimitedContainer } from "../../../shared/components/styles/limited.styled";
-import { DisplayFlexJustifyBetween } from "../../../shared/components/styles/display.styled";
-import { useProductReducer } from "../../../store/reducers/productReducer/useProductReducer";
 
 const { Search } = Input;
 

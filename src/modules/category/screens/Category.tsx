@@ -1,14 +1,14 @@
 import { Input } from "antd";
-import Screen from "../../../shared/components/screen/Screen";
-import Table from "../../../shared/components/table/Table";
-import { useCategory } from "../hooks/useCategory";
-import { CategoryType } from "../../../shared/components/types/CategoryType";
-import { LimitedContainer } from "../../../shared/components/styles/limited.styled";
-import Button from "../../../shared/components/buttons/button/Button";
-import { useNavigate } from "react-router-dom";
-import { CategoryRoutesEnum } from "../routes";
-import { DisplayFlexJustifyBetween } from "../../../shared/components/styles/display.styled";
 import { ColumnsType } from "antd/es/table";
+import { useNavigate } from "react-router-dom";
+import Button from "../../../shared/components/buttons/button/Button";
+import Screen from "../../../shared/components/screen/Screen";
+import { DisplayFlexJustifyBetween } from "../../../shared/components/styles/display.styled";
+import { LimitedContainer } from "../../../shared/components/styles/limited.styled";
+import Table from "../../../shared/components/table/Table";
+import { CategoryType } from "../../../shared/types/CategoryType";
+import { useCategory } from "../hooks/useCategory";
+import { CategoryRoutesEnum } from "../routes";
 
 const { Search } = Input;
 

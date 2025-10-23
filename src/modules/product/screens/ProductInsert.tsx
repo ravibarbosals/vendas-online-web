@@ -1,10 +1,5 @@
-import { useEffect } from "react";
 import Button from "../../../shared/components/buttons/button/Button";
 import Screen from "../../../shared/components/screen/Screen";
-import { URL_CATEGORY } from "../../../shared/constants/urls";
-import { MethodsEnum } from "../../../shared/enums/methods.enum";
-import { useDataContext } from "../../../shared/hooks/useDataContext";
-import { useRequests } from "../../../shared/hooks/useRequest";
 import { ProductRoutesEnum } from "../routes";
 import { ProductInsertContainer } from "../styles/productInsert.style";
 import Input from "../../../shared/components/inputs/input/Input";

@@ -1,5 +1,5 @@
-import { ProductType } from "../../../shared/components/types/ProductType";
-import  Tooltip  from '../../../shared/components/tooltip/Tooltip';
+import Tooltip from '../../../shared/components/tooltip/Tooltip';
+import { ProductType } from "../../../shared/types/ProductType";
 import { ImageProduct } from "../styles/tooltipImage.style";
 
 interface TooltipImageProps {

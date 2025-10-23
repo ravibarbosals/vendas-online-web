@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../hooks";
-import { ProductType } from "../../../shared/components/types/ProductType";
 import { setProductsAction } from ".";
+import { ProductType } from "../../../shared/types/ProductType";
+import { useAppSelector } from "../../hooks";
 
 export const useProductReducer = () => {
     const dispatch = useDispatch();

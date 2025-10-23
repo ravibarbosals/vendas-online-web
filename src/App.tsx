@@ -9,8 +9,8 @@ import { useRequests } from './shared/hooks/useRequest';
 import { URL_USER } from './shared/constants/urls';
 import { MethodsEnum } from './shared/enums/methods.enum';
 import { useEffect } from 'react';
-import { useGlobalContext } from './shared/hooks/useGlobalContext';
 import { categoryScreens } from './modules/category/routes';
+import { useGlobalReducer } from './store/reducers/globalReducer/useGlobalReducer';
 
 
   const routes: RouteObject[] = [...loginRoutes];
@@ -29,7 +29,7 @@ import { categoryScreens } from './modules/category/routes';
 
 function App() {
   const { contextHolder } = useNotification();
-  const { setUser } = useGlobalContext();
+  const { setUser } = useGlobalReducer();
   const { request } = useRequests();
 
   useEffect(() => {
