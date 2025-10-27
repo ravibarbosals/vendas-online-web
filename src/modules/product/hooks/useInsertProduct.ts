@@ -11,7 +11,7 @@ export const userInsertProduct = () => {
   const { setNotification } = useGlobalReducer();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [disableButton, setDisabledButton] = useState(true);
+  const [disabledButton, setDisabledButton] = useState(true);
   const [product, setProduct] = useState<InsertProduct>({
     name: '',
     price: 0,
@@ -60,7 +60,7 @@ export const userInsertProduct = () => {
   return {
     product,
     loading,
-    disableButton,
+    disabledButton,
     onChangeInput,
     handleInsertProduct,
     handleChangeSelect,

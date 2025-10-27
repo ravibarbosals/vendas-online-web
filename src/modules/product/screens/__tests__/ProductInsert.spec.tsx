@@ -26,7 +26,7 @@ jest.mock('../../hooks/useInsertProduct', () => ({
   userInsertProduct: () => ({
     product: mockProductInsert,
     loading: false,
-    disableButton: false,
+    disabledButton: false,
     onChangeInput: (e: React.ChangeEvent<HTMLInputElement>, x: string) => {
       value = e.target.value;
       type = x;

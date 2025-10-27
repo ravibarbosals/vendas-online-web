@@ -19,7 +19,7 @@ const ProductInsert = () => {
   const {
     product,
     loading,
-    disableButton,
+    disabledButton,
     onChangeInput,
     handleInsertProduct,
     handleChangeSelect,
@@ -97,7 +97,7 @@ const ProductInsert = () => {
               <Button
                 data-testid={ProductInsertTestIdEnum.PRODUCT_BUTTON_INSERT}
                 loading={loading}
-                disabled={disableButton}
+                disabled={disabledButton}
                 onClick={handleInsertProduct}
                 type="primary"
               >
