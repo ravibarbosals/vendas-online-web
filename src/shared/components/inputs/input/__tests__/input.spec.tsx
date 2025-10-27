@@ -2,8 +2,8 @@ import '@testing-library/jest-dom';
 
 import { render, screen } from '@testing-library/react';
 
+import { InputTestIdEnum } from '../enum/inputTestIdEnum';
 import Input from '../Input';
-import { InputTestIdEnum } from './inputTestIdEnum';
 
 const MARGIN = '23px';
 const TEST_ID = 'TEST_ID_INPUT';
