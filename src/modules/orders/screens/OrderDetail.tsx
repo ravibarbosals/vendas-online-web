@@ -1,8 +1,10 @@
 import type { DescriptionsProps } from 'antd';
 import { Descriptions, Divider } from 'antd';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import Screen from '../../../shared/components/screen/Screen';
+import { useOrderDetail } from '../hooks/useOrderDetail';
 import { OrderRoutesEnum } from '../routes';
 
 const items: DescriptionsProps['items'] = [
@@ -123,6 +125,11 @@ const items4: DescriptionsProps['items'] = [
 ];
 
 const OrderDetail: React.FC = () => {
+  const { orderId } = useParams<{ orderId: string }>();
+  const { order } = useOrderDetail(orderId);
+
+  console.log('orderId', order);
+
   return (
     <Screen
       listBreadcrumb={[

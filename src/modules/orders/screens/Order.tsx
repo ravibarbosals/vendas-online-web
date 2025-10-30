@@ -51,8 +51,8 @@ const Order = () => {
       ]}
     >
       <Table
-        onRow={() => ({
-          onClick: () => navigate(OrderRoutesEnum.ORDER_ID),
+        onRow={(record) => ({
+          onClick: () => navigate(`${OrderRoutesEnum.ORDER_ID}/${record.id}`),
         })}
         columns={columns}
         dataSource={orders}
