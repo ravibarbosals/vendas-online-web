@@ -4,10 +4,9 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import Screen from '../../../shared/components/screen/Screen';
+import { DisplayFlexJustifyCenter } from '../../../shared/components/styles/display.styled';
 import { useOrderDetail } from '../hooks/useOrderDetail';
 import { OrderRoutesEnum } from '../routes';
-import { DisplayFlexJustifyCenter } from '../../../shared/components/styles/display.styled';
-import { useRequests } from '../../../shared/hooks/useRequest';
 
 const items: DescriptionsProps['items'] = [
   {
@@ -129,11 +128,10 @@ const items4: DescriptionsProps['items'] = [
 const OrderDetail: React.FC = () => {
   const { orderId } = useParams<{ orderId: string }>();
   const { order, loading } = useOrderDetail(orderId);
-  
 
   console.log('orderId', order);
 
-  console.log('loading', loading)
+  console.log('loading', loading);
 
   return (
     <Screen
@@ -156,13 +154,13 @@ const OrderDetail: React.FC = () => {
         </DisplayFlexJustifyCenter>
       ) : (
         <>
-      <Descriptions title="Dados do Usuário" bordered items={items} />
-      <Divider />
-      <Descriptions title="Dados do pagamento" bordered items={items2} />
-      <Divider />
-      <Descriptions title="Dados do endereço" bordered items={items3} />
-      <Divider />
-      <Descriptions title="Produtos" bordered items={items4} />
+          <Descriptions title="Dados do Usuário" bordered items={items} />
+          <Divider />
+          <Descriptions title="Dados do pagamento" bordered items={items2} />
+          <Divider />
+          <Descriptions title="Dados do endereço" bordered items={items3} />
+          <Divider />
+          <Descriptions title="Produtos" bordered items={items4} />
         </>
       )}
     </Screen>
