@@ -1,7 +1,7 @@
 export interface UserType {
   id: number;
   name: string;
-  emial: string;
+  email: string;
   phone: string;
   cpf: string;
 }

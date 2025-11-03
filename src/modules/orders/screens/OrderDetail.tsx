@@ -1,4 +1,3 @@
-import type { DescriptionsProps } from 'antd';
 import { Descriptions, Divider, Spin } from 'antd';
 import React from 'react';
 import { useParams } from 'react-router-dom';
@@ -7,123 +6,6 @@ import Screen from '../../../shared/components/screen/Screen';
 import { DisplayFlexJustifyCenter } from '../../../shared/components/styles/display.styled';
 import { useOrderDetail } from '../hooks/useOrderDetail';
 import { OrderRoutesEnum } from '../routes';
-
-const items: DescriptionsProps['items'] = [
-  {
-    key: '1',
-    label: 'Nome',
-    children: 'Ravi',
-  },
-  {
-    key: '2',
-    label: 'Email',
-    children: 'Prepeaid',
-    span: 2,
-  },
-  {
-    key: '3',
-    label: 'Telefone',
-    children: 'YES',
-  },
-  {
-    key: '4',
-    label: 'CPF',
-    children: '2018-04-24 18:00:00',
-    span: 2,
-  },
-];
-
-const items2: DescriptionsProps['items'] = [
-  {
-    key: '1',
-    label: 'Nome',
-    children: 'Ravi',
-  },
-  {
-    key: '2',
-    label: 'Email',
-    children: 'Prepeaid',
-    span: 2,
-  },
-  {
-    key: '3',
-    label: 'Telefone',
-    children: 'YES',
-  },
-  {
-    key: '4',
-    label: 'CPF',
-    children: '2018-04-24 18:00:00',
-    span: 2,
-  },
-  {
-    key: '5',
-    label: 'Usage Time',
-    children: '2019-04-24 18:00:00',
-    span: 2,
-  },
-];
-
-const items3: DescriptionsProps['items'] = [
-  {
-    key: '1',
-    label: 'Nome',
-    children: 'Ravi',
-  },
-  {
-    key: '2',
-    label: 'Email',
-    children: 'Prepeaid',
-    span: 2,
-  },
-  {
-    key: '3',
-    label: 'Telefone',
-    children: 'YES',
-  },
-  {
-    key: '4',
-    label: 'CPF',
-    children: '2018-04-24 18:00:00',
-    span: 2,
-  },
-  {
-    key: '5',
-    label: 'Usage Time',
-    children: '2019-04-24 18:00:00',
-    span: 2,
-  },
-];
-const items4: DescriptionsProps['items'] = [
-  {
-    key: '1',
-    label: 'Nome',
-    children: 'Ravi',
-  },
-  {
-    key: '2',
-    label: 'Email',
-    children: 'Prepeaid',
-    span: 2,
-  },
-  {
-    key: '3',
-    label: 'Telefone',
-    children: 'YES',
-  },
-  {
-    key: '4',
-    label: 'CPF',
-    children: '2018-04-24 18:00:00',
-    span: 2,
-  },
-  {
-    key: '5',
-    label: 'Usage Time',
-    children: '2019-04-24 18:00:00',
-    span: 2,
-  },
-];
 
 const OrderDetail: React.FC = () => {
   const { orderId } = useParams<{ orderId: string }>();
@@ -154,13 +36,58 @@ const OrderDetail: React.FC = () => {
         </DisplayFlexJustifyCenter>
       ) : (
         <>
-          <Descriptions title="Dados do Usuário" bordered items={items} />
+          <Descriptions title="Dados do usuário" bordered>
+            <Descriptions.Item label="Nome">{order.user?.name}</Descriptions.Item>
+            <Descriptions.Item label="Email" span={2}>
+              {order.user?.email}
+            </Descriptions.Item>
+            <Descriptions.Item label="Telefone">{order.user?.phone}</Descriptions.Item>
+            <Descriptions.Item label="CPF" span={2}>
+              {order.user?.cpf}
+            </Descriptions.Item>
+          </Descriptions>
           <Divider />
-          <Descriptions title="Dados do pagamento" bordered items={items2} />
+          <Descriptions title="Dados do pagamento" bordered>
+            <Descriptions.Item label="Preço">{order.payment?.price}</Descriptions.Item>
+            <Descriptions.Item label="Desconto" span={2}>
+              {order.payment?.discount}
+            </Descriptions.Item>
+            <Descriptions.Item label="Preço Final">{order.payment?.finalPrice}</Descriptions.Item>
+            <Descriptions.Item label="Tipo de pagamento" span={2}>
+              {order.payment?.type}
+            </Descriptions.Item>
+            <Descriptions.Item label="Status" span={2}>
+              {order.payment?.paymentStatus?.name}
+            </Descriptions.Item>
+          </Descriptions>
           <Divider />
-          <Descriptions title="Dados do endereço" bordered items={items3} />
+          <Descriptions title="Dados do endereço" bordered>
+            <Descriptions.Item label="Nome">julioNovo</Descriptions.Item>
+            <Descriptions.Item label="Email" span={2}>
+              Prepaid
+            </Descriptions.Item>
+            <Descriptions.Item label="Telefone">YES</Descriptions.Item>
+            <Descriptions.Item label="CPF" span={2}>
+              2018-04-24 18:00:00
+            </Descriptions.Item>
+            <Descriptions.Item label="Usage Time" span={2}>
+              2019-04-24 18:00:00
+            </Descriptions.Item>
+          </Descriptions>
           <Divider />
-          <Descriptions title="Produtos" bordered items={items4} />
+          <Descriptions title="Produtos" bordered>
+            <Descriptions.Item label="Nome">julioNovo</Descriptions.Item>
+            <Descriptions.Item label="Email" span={2}>
+              Prepaid
+            </Descriptions.Item>
+            <Descriptions.Item label="Telefone">YES</Descriptions.Item>
+            <Descriptions.Item label="CPF" span={2}>
+              2018-04-24 18:00:00
+            </Descriptions.Item>
+            <Descriptions.Item label="Usage Time" span={2}>
+              2019-04-24 18:00:00
+            </Descriptions.Item>
+          </Descriptions>
         </>
       )}
     </Screen>

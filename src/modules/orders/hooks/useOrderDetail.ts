@@ -10,7 +10,7 @@ export const useOrderDetail = (orderId?: string) => {
   const { request, loading } = useRequests();
 
   useEffect(() => {
-    request(URL_ORDER_ID.replace('{}orderId', orderId || ''), MethodsEnum.GET, setOrder);
+    request(URL_ORDER_ID.replace('{orderId}', orderId || ''), MethodsEnum.GET, setOrder);
   }, []);
 
   return {
