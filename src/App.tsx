@@ -6,6 +6,7 @@ import { firstScreenRoutes } from './modules/firstScreen/routes';
 import { loginRoutes } from './modules/login/routes';
 import { orderScreens } from './modules/orders/routes';
 import { productScreen } from './modules/product/routes';
+import { userScreens } from './modules/user/routes';
 import { URL_USER } from './shared/constants/urls';
 import { MethodsEnum } from './shared/enums/methods.enum';
 import { getAuthorizationToken, verifyLoggedIn } from './shared/functions/connection/auth';
@@ -18,6 +19,7 @@ const routesLoggedIn: RouteObject[] = [
   ...productScreen,
   ...categoryScreens,
   ...firstScreenRoutes,
+  ...userScreens,
   ...orderScreens,
 ].map((route) => ({
   ...route,
