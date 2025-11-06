@@ -90,7 +90,6 @@ const Product = () => {
         <LimitedContainer width={240}>
           <Search placeholder="Buscar produto" onSearch={onSearch} enterButton />
         </LimitedContainer>
-
         <LimitedContainer width={120}>
           <Button type="primary" onClick={handleOnClickInsert}>
             Inserir
