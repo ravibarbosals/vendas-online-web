@@ -2,6 +2,7 @@ import { Spin } from 'antd';
 import { Input } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 
+import Button from '../../../shared/components/buttons/button/Button';
 import Screen from '../../../shared/components/screen/Screen';
 import {
   DisplayFlexJustifyBetween,
@@ -13,7 +14,6 @@ import { insertMaskInCpf } from '../../../shared/functions/cpf';
 import { insertMaksInPhone } from '../../../shared/functions/phone';
 import { UserType } from '../../login/types/UserType';
 import { useUser } from '../hooks/useUser';
-import Button from '../../../shared/components/buttons/button/Button';
 
 const { Search } = Input;
 
