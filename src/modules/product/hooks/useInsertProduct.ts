@@ -16,6 +16,7 @@ const DEFAULT_PRODUCT = {
 
 export const userInsertProduct = (productId?: string) => {
   const navigate = useNavigate();
+  const [loadingProduct, setLoadingProduct] = useState(false);
   const { request, loading } = useRequests();
   const { product: productReducer, setProduct: setProductReducer } = useProductReducer();
   const [isEdit, setIsEdit] = useState(false);
@@ -42,13 +43,19 @@ export const userInsertProduct = (productId?: string) => {
   }, [productReducer]);
 
   useEffect(() => {
-    if (productId) {
-      setIsEdit(true);
-      request(
+    const findProduct = async () => {
+      setLoadingProduct(true);
+      await request(
         URL_PRODUCT_ID.replace('{productId}', productId || ''),
         MethodsEnum.GET,
         setProductReducer,
       );
+      setLoadingProduct(false);
+    };
+
+    if (productId) {
+      setIsEdit(true);
+      findProduct();
     } else {
       setProductReducer(undefined);
       setProduct(DEFAULT_PRODUCT);
@@ -84,9 +91,10 @@ export const userInsertProduct = (productId?: string) => {
         MethodsEnum.PUT,
         undefined,
         product,
+        'Produto modificado!',
       );
     } else {
-      request(URL_PRODUCT, MethodsEnum.POST, undefined, product);
+      request(URL_PRODUCT, MethodsEnum.POST, undefined, product, 'Produto criado!');
     }
     navigate(ProductRoutesEnum.PRODUCT);
   };
@@ -96,6 +104,7 @@ export const userInsertProduct = (productId?: string) => {
     loading,
     disabledButton,
     isEdit,
+    loadingProduct,
     onChangeInput,
     handleInsertProduct,
     handleChangeSelect,

@@ -21,6 +21,7 @@ export const useRequests = () => {
     methods: MethodType,
     saveGlobal?: (object: T) => void,
     body?: unknown,
+    message?: string,
   ): Promise<T | undefined> => {
     setLoading(true);
 
@@ -28,6 +29,9 @@ export const useRequests = () => {
       .then((result) => {
         if (saveGlobal) {
           saveGlobal(result);
+        }
+        if (message) {
+          setNotification(message, 'success');
         }
         return result;
       })
